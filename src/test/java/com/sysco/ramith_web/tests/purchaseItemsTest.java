@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
-public class LoginToAthletesTest extends TestBase {
+public class purchaseItemsTest extends TestBase {
 
     @BeforeClass
     public void init(ITestContext iTestContext) {
