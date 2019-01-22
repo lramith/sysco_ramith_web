@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 
 /**
- * Created by Rifad on 5/21/18.
+ * This class provide page level functions and the elements for the login page
  */
 public class LogInPage {
     protected static SyscoLabUI syscoLabUIOgm;
@@ -16,6 +16,7 @@ public class LogInPage {
     private By btnLogin = By.id("send2");
     private By lblErrorUserName = By.id("email-error");
     private By lblPassword = By.id("pass-error");
+    private By lblInvalidCredentials = By.xpath("//*[@id=\"maincontent\"]/div[2]/div[2]/div[1]/div/div");
     private By btnForgotPw = By.xpath("//*[@id=\"login-form\"]/fieldset/div[4]/div[2]/a/span");
     private By lnkLoggedInName = By.xpath("//header/div[1]/div[1]/ul/li[2]/span/span");
 
@@ -32,7 +33,7 @@ public class LogInPage {
         }
     }
 
-    public boolean isLoginButtonDisplayed() {
+    public boolean isLoginHyperLinkDisplayed() {
         return syscoLabUIOgm.isDisplayed(lnkLogin);
     }
 
@@ -45,7 +46,7 @@ public class LogInPage {
     }
 
     public void enterPassword(String password) {
-        syscoLabUIOgm.sendKeys(txtUserName, password);
+        syscoLabUIOgm.sendKeys(txtPassword, password);
     }
 
     public void clickOnLoginButton() {
@@ -56,7 +57,7 @@ public class LogInPage {
         return syscoLabUIOgm.isDisplayed(lblErrorUserName);
     }
 
-    public String getUserNameErrorMessageDisplayed(){
+    public String getUserNameErrorMessage(){
         return syscoLabUIOgm.getText(lblErrorUserName);
     }
 
@@ -64,8 +65,16 @@ public class LogInPage {
         return syscoLabUIOgm.isDisplayed(lblPassword);
     }
 
-    public String getPasswordErrorMessageDisplayed(){
+    public String getPasswordErrorMessage(){
         return syscoLabUIOgm.getText(lblPassword);
+    }
+
+    public boolean isInvalidCredentialErrorDisplayed(){
+        return syscoLabUIOgm.isDisplayed(lblInvalidCredentials);
+    }
+
+    public String getInvalidCredentialErrorMessege(){
+        return syscoLabUIOgm.getText(lblInvalidCredentials);
     }
 
     public String getLoggedInUserName(){

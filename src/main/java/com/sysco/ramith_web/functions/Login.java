@@ -6,14 +6,14 @@ import com.sysco.ramith_web.utils.DriverSetUpUtil;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
- * Created by Rifad on 5/21/18.
+ * This class provide functions related to login to the application
  */
 public class Login  {
 
     public static LogInPage loginPage = new LogInPage();
 
 
-    public static void loadLoginPage() {
+    public void loadLoginPage() {
 
         if (Constants.RUN_LOCALLY) {
             DriverSetUpUtil.setToRunLocally();
@@ -22,6 +22,10 @@ public class Login  {
         } else {
             loginPage.loadAthletesPage(DriverSetUpUtil.setToRunRemotely(Constants.APP_OS), Constants.APP_URL);
         }
+    }
+
+    public boolean isLoginHyperLinkDisplayed(){
+        return loginPage.isLoginHyperLinkDisplayed();
     }
 
     public String logInToApplication(String userName, String password) {
@@ -33,8 +37,32 @@ public class Login  {
         loginWithGivenCredentials("", "");
     }
 
-    public void logInWithInvalidCredentials() {
-        loginWithGivenCredentials("", "");
+    public String logInWithInvalidCredentials(String userName, String password) {
+        loginWithGivenCredentials(userName, password);
+        if(loginPage.isInvalidCredentialErrorDisplayed()){
+            return loginPage.getInvalidCredentialErrorMessege();
+        }
+        else {
+            return null;
+        }
+    }
+
+    public String getUserNameErrorMessage(){
+        if(loginPage.isUserNameErrorMessageDisplayed()){
+            return loginPage.getUserNameErrorMessage();
+        }
+        else {
+            return null;
+        }
+    }
+
+    public String getPasswordErrorMessage(){
+        if(loginPage.isPasswordErrorMessageDisplayed()){
+            return loginPage.getPasswordErrorMessage();
+        }
+        else {
+            return null;
+        }
     }
 
     private void loginWithGivenCredentials(String userName, String password){
