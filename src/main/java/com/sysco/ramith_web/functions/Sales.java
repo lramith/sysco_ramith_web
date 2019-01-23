@@ -7,7 +7,7 @@ import com.sysco.ramith_web.pages.SalesPage;
  */
 public class Sales {
 
-    public static SalesPage salesPage = new SalesPage();
+    private static SalesPage salesPage = new SalesPage();
 
     public boolean emptyExistingCart(){
         salesPage.clickOnShoppingCart();

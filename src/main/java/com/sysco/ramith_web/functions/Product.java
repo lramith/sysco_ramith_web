@@ -10,9 +10,12 @@ import java.util.List;
  */
 public class Product {
 
-    public static ProductPage productPage = new ProductPage();
+    private static ProductPage productPage = new ProductPage();
+    private String productName;
+    private String productPrice;
+    private String successMessage;
 
-    public WebElement seectAvailableSize() {
+    public WebElement selectAvailableSize() {
         List<WebElement> sizes = productPage.getAvailableSizes();
         for (WebElement size : sizes) {
             if (size.getAttribute("class").contains("")) {
@@ -20,6 +23,12 @@ public class Product {
             }
         }
         return null;
+    }
+
+    public void storeProductNameAndPrice(){
+        productName = productPage.getProductName();
+        productPrice = productPage.getProductPrice();
+        successMessage = "You added"+ productName +"to your shopping cart";
     }
 
     public void addProductToCart(){
@@ -33,5 +42,17 @@ public class Product {
         else {
             return null;
         }
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getProductPrice() {
+        return productPrice;
+    }
+
+    public String getSuccessMessage() {
+        return successMessage;
     }
 }
