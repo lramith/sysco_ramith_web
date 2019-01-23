@@ -3,7 +3,7 @@ package com.sysco.ramith_web.functions;
 import com.sysco.ramith_web.pages.SalesPage;
 
 /**
- * This class provide functions related to login to the application
+ * This class provide functions related to sales
  */
 public class Sales {
 
