@@ -6,6 +6,7 @@ public class LoginData {
     public static String userName;
     public static String password;
     public static String invalidUserName;
+    public static String name;
 
     public String getUserName() {
         return userName;
@@ -17,5 +18,9 @@ public class LoginData {
 
     public static String getInvalidUserName() {
         return invalidUserName;
+    }
+
+    public static String getName() {
+        return name;
     }
 }

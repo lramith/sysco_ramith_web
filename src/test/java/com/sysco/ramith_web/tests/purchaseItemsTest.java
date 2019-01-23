@@ -20,14 +20,13 @@ public class purchaseItemsTest extends TestBase {
     private Sales sales;
     private Product product;
     private LoginData loginData;
-    private static final String LOGGED_IN_USER = "WILLIAM JACOB";
     private static final String INVALID_USERNAME_ERROR_MSG = "YOU DID NOT SIGN IN CORRECTLY OR YOUR ACCOUNT IS TEMPORARILY DISABLED.";
     private static final String BLANK_USERNAME_PASSWORD_ERROR = "THIS IS A REQUIRED FIELD.";
 
     @BeforeTest
     public void init(ITestContext iTestContext) {
         iTestContext.setAttribute("feature", "Login - ValidLogin");
-        loginData = ExcelUtil.getLoginData("$as238l");
+        loginData = ExcelUtil.getLoginData("$as2382");
         login = new Login();
         sales = new Sales();
         product = new Product();
@@ -37,7 +36,7 @@ public class purchaseItemsTest extends TestBase {
     public void testPurchasing() throws RuntimeException{
         login.loadLoginPage();
         Assert.assertTrue(login.isLoginHyperLinkDisplayed(), "Login hyperlink should display in the home page");
-        Assert.assertEquals(login.logInToApplication(loginData.getUserName(), loginData.getPassword()), LOGGED_IN_USER, "User should be able to login to the application");
+        Assert.assertEquals(login.logInToApplication(loginData.getUserName(), loginData.getPassword()), loginData.getName(), "User should be able to login to the application");
         Assert.assertTrue(sales.emptyExistingCart(), "User should be able to empty existing cart");
         Assert.assertTrue(sales.navigateToRandomProduct(), "User should be able access random product");
         product.selectAvailableSize();

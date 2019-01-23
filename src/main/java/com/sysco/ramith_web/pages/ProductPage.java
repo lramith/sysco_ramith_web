@@ -11,9 +11,9 @@ import static com.sysco.ramith_web.pages.LogInPage.syscoLabUIOgm;
  * This class provide page level functions and the elements for the login page
  */
 public class ProductPage {
-    private By lstSizeIndicator = By.xpath("//*[@id=\"swatch-row-228\"]/div");
+    private By lstSizeIndicator = By.xpath("//*[@id=\"swatch-row-277\"]/div");
     private By lblProductName = By.xpath("//*[@id=\"maincontent\"]/div/div/div[1]/div[2]/div/div[1]/div[1]/div/h1/span");
-    private By lblProductPrice = By.xpath("//*[@id=\"product-price-261871\"]/span");
+    private By lblProductPrice = By.xpath("//*[@id=\"maincontent\"]/div/div/div[1]/div[2]/div/div[1]/div[2]/div/span");
     private By btnAddToCart = By.id("product-addtocart-button");
     private By lblAddToCartSuccess = By.xpath("//*[@id=\"maincontent\"]/div/div/div[1]/div[1]/div[1]/div[2]/div[2]/div/div");
 

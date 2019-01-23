@@ -18,7 +18,7 @@ public class Product {
     public WebElement selectAvailableSize() {
         List<WebElement> sizes = productPage.getAvailableSizes();
         for (WebElement size : sizes) {
-            if (size.getAttribute("class").contains("")) {
+            if (size.getAttribute("class").equals("swatch-option text")) {
                 return size;
             }
         }
