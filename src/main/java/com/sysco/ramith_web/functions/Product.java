@@ -15,7 +15,11 @@ public class Product {
     private String productPrice;
     private String successMessage;
 
-    public WebElement selectAvailableSize() {
+    public void selectAvailableSize() {
+        productPage.clickOnCorrectSize(getAvailableSize());
+    }
+
+    private WebElement getAvailableSize() {
         List<WebElement> sizes = productPage.getAvailableSizes();
         for (WebElement size : sizes) {
             if (size.getAttribute("class").equals("swatch-option text")) {
@@ -28,14 +32,14 @@ public class Product {
     public void storeProductNameAndPrice(){
         productName = productPage.getProductName();
         productPrice = productPage.getProductPrice();
-        successMessage = "You added"+ productName +"to your shopping cart";
+        successMessage = "You added "+ productName +" to your shopping cart";
     }
 
     public void addProductToCart(){
         productPage.clickOnAddToCartButton();
     }
 
-    public String getAddToCartSuccessMessge(){
+    public String getAddToCartSuccessMessage(){
         if (productPage.isAddToCartSuccessMessageDisplayed()){
             return productPage.getTextOfAddToCartSuccessMessage();
         }

@@ -11,7 +11,8 @@ public class Sales {
 
     public boolean emptyExistingCart(){
         salesPage.clickOnShoppingCart();
-        while (salesPage.isItemsExist()) {
+        int numberOfItems = salesPage.getNumberOfItemsInCart();
+        for (;numberOfItems != 0 && salesPage.isItemsExist();numberOfItems--) {
             salesPage.removeFirstCartItem();
             salesPage.removeConfirmItem();
         }

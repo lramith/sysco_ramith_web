@@ -9,7 +9,7 @@ import com.sysco.ramith_web.utils.ExcelUtil;
 import com.sysco.ramith_web.utils.TestBase;
 import org.testng.Assert;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -42,7 +42,7 @@ public class purchaseItemsTest extends TestBase {
         product.selectAvailableSize();
         product.storeProductNameAndPrice();
         product.addProductToCart();
-        Assert.assertEquals(product.getAddToCartSuccessMessge(), product.getSuccessMessage(), "Product should be successfully added");
+        Assert.assertEquals(product.getAddToCartSuccessMessage(), product.getSuccessMessage(), "Product should be successfully added");
     }
 
     @Test
@@ -55,7 +55,7 @@ public class purchaseItemsTest extends TestBase {
         Assert.assertEquals(login.logInWithInvalidCredentials(loginData.getInvalidUserName(), loginData.getPassword()), INVALID_USERNAME_ERROR_MSG);
     }
 
-    @AfterTest
+    @AfterMethod
     public void closeBrowser () {
         login.quiteDriver();
     }

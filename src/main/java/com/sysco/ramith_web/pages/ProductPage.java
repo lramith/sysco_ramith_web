@@ -16,9 +16,14 @@ public class ProductPage {
     private By lblProductPrice = By.xpath("//*[@id=\"maincontent\"]/div/div/div[1]/div[2]/div/div[1]/div[2]/div/span");
     private By btnAddToCart = By.id("product-addtocart-button");
     private By lblAddToCartSuccess = By.xpath("//*[@id=\"maincontent\"]/div/div/div[1]/div[1]/div[1]/div[2]/div[2]/div/div");
+    private By btnProceedToCheckout = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[2]/div[1]/div/button");
 
     public List<WebElement> getAvailableSizes() {
         return syscoLabUIOgm.findElements(lstSizeIndicator);
+    }
+
+    public void clickOnCorrectSize(WebElement lblSize){
+        syscoLabUIOgm.click(lblSize);
     }
 
     public void clickOnAddToCartButton(){
@@ -39,5 +44,9 @@ public class ProductPage {
 
     public String getProductPrice(){
         return syscoLabUIOgm.getText(lblProductPrice);
+    }
+
+    public void clikcOnCheckout(){
+        syscoLabUIOgm.click(btnProceedToCheckout);
     }
 }

@@ -12,7 +12,7 @@ public class SalesPage {
     private By lnkFirstItem = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/div[1]/div[1]");
     private By lblNoItemsInTheCart = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/strong/span");
     private By lnkRemoveFirstItem = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/div[1]/div[1]/a[2]");
-    private By btnRemoveConfirm = By.xpath("/html/body/div[5]/aside[2]/div[2]/footer/button[2]");
+    private By btnRemoveConfirm = By.xpath("//body/div[6]/aside[2]/div[2]/footer/button[2]");
     private By lstCategories = By.xpath("//header/div[2]/nav/ul");
     private By lstSubCategories = By.xpath("//header/div[2]/nav/ul/li[4]/div/ul/li[2]/div/ul/li/a");
     private By lstProducts = By.xpath("//*[@id=\"ewave-layerednavigation-product-list\"]/div[2]/ul/li");
@@ -30,11 +30,17 @@ public class SalesPage {
         return syscoLabUIOgm.isDisplayed(lnkFirstItem);
     }
 
+    public int getNumberOfItemsInCart(){
+        return syscoLabUIOgm.findElements(lnkRemoveFirstItem).size();
+    }
+
     public void removeFirstCartItem(){
+        syscoLabUIOgm.waitTillElementLoaded(lnkRemoveFirstItem);
         syscoLabUIOgm.click(lnkRemoveFirstItem);
     }
 
     public void removeConfirmItem(){
+        syscoLabUIOgm.waitTillElementLoaded(btnRemoveConfirm);
         syscoLabUIOgm.click(btnRemoveConfirm);
     }
 
