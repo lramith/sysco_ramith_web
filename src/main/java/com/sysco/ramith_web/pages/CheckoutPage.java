@@ -1,9 +1,6 @@
 package com.sysco.ramith_web.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 import static com.sysco.ramith_web.pages.LogInPage.syscoLabUIOgm;
 
@@ -27,73 +24,105 @@ public class CheckoutPage {
     private By rdBtnCreditCardPay = By.xpath("//*[@id=\"checkout-payment-method-load\"]/div/div/div[3]/div[1]/label");
     private By lblValidCreditCardRequiredError = By.xpath("//*[@id=\"payment_form_braintree\"]/div[2]/div/div[2]/span");
     private By lblCreditCardInvalidMonthError = By.xpath("//*[@id=\"payment_form_braintree\"]/div[3]/div/div[1]/div[2]/span");
-    private By lblCreditCardInvalidMonth = By.xpath("//*[@id=\"payment_form_braintree\"]/div[3]/div/div[2]/div[2]/span");
+    private By lblCreditCardInvalidYearError = By.xpath("//*[@id=\"payment_form_braintree\"]/div[3]/div/div[2]/div[2]/span");
 
-    public By getBtnProceedToCheckout() {
-        return btnProceedToCheckout;
+    public void clickProceedToCheckout() {
+        syscoLabUIOgm.click(btnProceedToCheckout);
     }
 
-    public By getLblSecureCheckout() {
-        return lblSecureCheckout;
+    public boolean isSecureCheckoutHeadingDisplayed() {
+        return syscoLabUIOgm.isDisplayed(lblSecureCheckout);
     }
 
-    public By getTxtFirstName() {
-        return txtFirstName;
+    public String getSecureCheckoutHeading() {
+        return syscoLabUIOgm.getText(lblSecureCheckout);
     }
 
-    public By getTxtLastName() {
-        return txtLastName;
+    public String getFirstName() {
+        return syscoLabUIOgm.getText(txtFirstName);
     }
 
-    public By getBtnContinue() {
-        return btnContinue;
+    public String getLastName() {
+        return syscoLabUIOgm.getText(txtLastName);
     }
 
-    public By getLblCityRequiredField() {
-        return lblCityRequiredField;
+    public void clickContinue() {
+        syscoLabUIOgm.click(btnContinue);
     }
 
-    public By getLblStateRequiredField() {
-        return lblStateRequiredField;
+    public boolean isCityRequiredFieldErrorDisplayed() {
+        return syscoLabUIOgm.isDisplayed(lblCityRequiredField);
     }
 
-    public By getLblPostCodeRequiredField() {
-        return lblPostCodeRequiredField;
+    public String getCityRequiredFieldError() {
+        return syscoLabUIOgm.getText(lblCityRequiredField);
     }
 
-    public By getLblPhoneRequiredField() {
-        return lblPhoneRequiredField;
+    public boolean isStateRequiredFieldErrorDisplayed() {
+        return syscoLabUIOgm.isDisplayed(lblStateRequiredField);
     }
 
-    public By getTxtPostCode() {
-        return txtPostCode;
+    public String getStateRequiredFieldError() {
+        return syscoLabUIOgm.getText(lblStateRequiredField);
     }
 
-    public By getDrpFirstPostCode() {
-        return drpFirstPostCode;
+    public boolean isPostCodeRequiredFieldErrorDisplayed() {
+        return syscoLabUIOgm.isDisplayed(lblPostCodeRequiredField);
     }
 
-    public By getTxtAddressLine() {
-        return txtAddressLine;
+    public String getPostCodeRequiredFieldError() {
+        return syscoLabUIOgm.getText(lblPostCodeRequiredField);
     }
 
-    public By getTxtPhoneNumber() {
-        return txtPhoneNumber;
+    public boolean isPhoneRequiredFieldDisplayed() {
+        return syscoLabUIOgm.isDisplayed(lblPhoneRequiredField);
     }
 
-    public By getRdBtnCreditCardPay() {
-        return rdBtnCreditCardPay;
+    public String getPhoneRequiredFieldError() {
+        return syscoLabUIOgm.getText(lblPhoneRequiredField);
     }
 
-    public By getLblValidCreditCardRequiredError() {
-        return lblValidCreditCardRequiredError;
+    public void setPostCode(String postCode) {
+        syscoLabUIOgm.sendKeys(txtPostCode, postCode);
     }
 
-    public By getLblCreditCardInvalidMonthError() {
-        return lblCreditCardInvalidMonthError;
+    public void selectFirstPostCode() {
+        syscoLabUIOgm.click(drpFirstPostCode);
     }
 
-    public By getLblCreditCardInvalidMonth() {
-        return lblCreditCardInvalidMonth;
+    public void setAddressLine(String address) {
+        syscoLabUIOgm.sendKeys(txtAddressLine, address);
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        syscoLabUIOgm.sendKeys(txtPhoneNumber, phoneNumber);
+    }
+
+    public void selectCreditCardPay() {
+        syscoLabUIOgm.click(rdBtnCreditCardPay);
+    }
+
+    public boolean isValidCreditCardRequiredErrorDisplayed() {
+        return syscoLabUIOgm.isDisplayed(lblValidCreditCardRequiredError);
+    }
+
+    public String getValidCreditCardRequiredError() {
+        return syscoLabUIOgm.getText(lblValidCreditCardRequiredError);
+    }
+
+    public boolean isCreditCardInvalidMonthErrorDisplayed() {
+        return syscoLabUIOgm.isDisplayed(lblCreditCardInvalidMonthError);
+    }
+
+    public String getCreditCardInvalidMonthError() {
+        return syscoLabUIOgm.getText(lblCreditCardInvalidMonthError);
+    }
+
+    public boolean isCreditCardInvalidYearErrorDisplayed() {
+        return syscoLabUIOgm.isDisplayed(lblCreditCardInvalidYearError);
+    }
+
+    public String getCreditCardInvalidYearError() {
+        return syscoLabUIOgm.getText(lblCreditCardInvalidYearError);
     }
 }
