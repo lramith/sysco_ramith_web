@@ -9,14 +9,17 @@ import static com.sysco.ramith_web.pages.LogInPage.syscoLabUIOgm;
  */
 public class SalesPage {
     private By lnkShoppingCart = By.xpath("//header/div[2]/div/div[4]");
-    private By lnkFirstItem = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/div[1]/div[1]");
     private By lblNoItemsInTheCart = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/strong/span");
-    private By lnkRemoveFirstItem = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/div[1]/div[1]/a[2]");
-    private By btnRemoveConfirm = By.xpath("//body/div[6]/aside[2]/div[2]/footer/button[2]");
+    private By lblShoppingCartHeading = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[1]/strong");
+    private By lnkRemoveFirstItem = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/div[1]/div/a[2]");
+    private By btnRemoveConfirmPopup = By.xpath("//body/div[5]/aside[2]/div[2]");
+    private By btnRemoveConfirm = By.xpath("//body/div[5]/aside[2]/div[2]/footer/button[2]");
     private By lstCategories = By.xpath("//header/div[2]/nav/ul");
     private By lstSubCategories = By.xpath("//header/div[2]/nav/ul/li[4]/div/ul/li[2]/div/ul/li/a");
     private By lstProducts = By.xpath("//*[@id=\"ewave-layerednavigation-product-list\"]/div[2]/ul/li");
     private By lblProductHeading = By.xpath("//*[@id=\"maincontent\"]/div/div/div[1]/div[2]/div/div[1]/div[1]/div/h1/span");
+    private By lblCartProductName = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/div[1]/div/div[1]/strong/a");
+    private By lblCartProductPrice = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/div[1]/div/div[1]/div[1]/div[2]/div/span/span/span/span");
 
     public void clickOnShoppingCart() {
         syscoLabUIOgm.click(lnkShoppingCart);
@@ -26,8 +29,8 @@ public class SalesPage {
         return syscoLabUIOgm.isDisplayed(lblNoItemsInTheCart);
     }
 
-    public boolean isItemsExist() {
-        return syscoLabUIOgm.isDisplayed(lnkFirstItem);
+    public void waitUntilICartLoads(){
+        syscoLabUIOgm.waitTillElementLoaded(lblShoppingCartHeading);
     }
 
     public int getNumberOfItemsInCart(){
@@ -35,12 +38,14 @@ public class SalesPage {
     }
 
     public void removeFirstCartItem(){
-        syscoLabUIOgm.waitTillElementLoaded(lnkRemoveFirstItem);
         syscoLabUIOgm.click(lnkRemoveFirstItem);
     }
 
+    public void waitUntilConfirmPopup(){
+        syscoLabUIOgm.waitTillElementLoaded(btnRemoveConfirmPopup);
+    }
+
     public void removeConfirmItem(){
-        syscoLabUIOgm.waitTillElementLoaded(btnRemoveConfirm);
         syscoLabUIOgm.click(btnRemoveConfirm);
     }
 
@@ -75,6 +80,14 @@ public class SalesPage {
 
     public boolean isProductHeadingDisplayed(){
         return syscoLabUIOgm.isDisplayed(lblProductHeading);
+    }
+
+    public String getCartProductName(){
+        return syscoLabUIOgm.getText(lblCartProductName);
+    }
+
+    public String getCartProductPrice(){
+        return syscoLabUIOgm.getText(lblCartProductPrice);
     }
 
 }

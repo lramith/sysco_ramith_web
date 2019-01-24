@@ -9,15 +9,30 @@ public class Sales {
 
     private static SalesPage salesPage = new SalesPage();
 
-    public boolean emptyExistingCart(){
+    public void emptyExistingCart(){
         salesPage.clickOnShoppingCart();
-        int numberOfItems = salesPage.getNumberOfItemsInCart();
-        for (;numberOfItems != 0 && salesPage.isItemsExist();numberOfItems--) {
-            salesPage.removeFirstCartItem();
-            salesPage.removeConfirmItem();
+        salesPage.waitUntilICartLoads();
+        if(!salesPage.isNoItemsMessegeDisplayed()) {
+            int numberOfItems = salesPage.getNumberOfItemsInCart();
+            for (; numberOfItems != 0 ; numberOfItems--) {
+                salesPage.removeFirstCartItem();
+                salesPage.waitUntilConfirmPopup();
+                salesPage.removeConfirmItem();
+            }
         }
         salesPage.clickOnShoppingCart();
-        return !salesPage.isItemsExist();
+    }
+
+    public void viewCart(){
+        salesPage.clickOnShoppingCart();
+    }
+
+    public String getCartProductName(){
+        return salesPage.getCartProductName();
+    }
+
+    public String getCartProductPrice(){
+        return salesPage.getCartProductPrice();
     }
 
     public boolean navigateToRandomProduct(){

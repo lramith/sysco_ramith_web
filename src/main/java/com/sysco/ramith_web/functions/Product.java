@@ -20,6 +20,7 @@ public class Product {
     }
 
     private WebElement getAvailableSize() {
+        select the size type
         List<WebElement> sizes = productPage.getAvailableSizes();
         for (WebElement size : sizes) {
             if (size.getAttribute("class").equals("swatch-option text")) {
@@ -32,7 +33,7 @@ public class Product {
     public void storeProductNameAndPrice(){
         productName = productPage.getProductName();
         productPrice = productPage.getProductPrice();
-        successMessage = "You added "+ productName +" to your shopping cart";
+        successMessage = "You added "+ productName +" to your shopping cart.";
     }
 
     public void addProductToCart(){
@@ -48,11 +49,11 @@ public class Product {
         }
     }
 
-    public String getProductName() {
+    public String getAddedProductName() {
         return productName;
     }
 
-    public String getProductPrice() {
+    public String getAddedProductPrice() {
         return productPrice;
     }
 

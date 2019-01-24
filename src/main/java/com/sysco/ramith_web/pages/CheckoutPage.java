@@ -23,6 +23,7 @@ public class CheckoutPage {
     private By txtPhoneNumber = By.id("RE4DNMK");
     private By rdBtnCreditCardPay = By.xpath("//*[@id=\"checkout-payment-method-load\"]/div/div/div[3]/div[1]/label");
     private By lblValidCreditCardRequiredError = By.xpath("//*[@id=\"payment_form_braintree\"]/div[2]/div/div[2]/span");
+    private By txtCreditCardNumber = By.id("braintree-hosted-field-number");
     private By lblCreditCardInvalidMonthError = By.xpath("//*[@id=\"payment_form_braintree\"]/div[3]/div/div[1]/div[2]/span");
     private By lblCreditCardInvalidYearError = By.xpath("//*[@id=\"payment_form_braintree\"]/div[3]/div/div[2]/div[2]/span");
 
@@ -108,6 +109,10 @@ public class CheckoutPage {
 
     public String getValidCreditCardRequiredError() {
         return syscoLabUIOgm.getText(lblValidCreditCardRequiredError);
+    }
+
+    public void setValidCreditCardNumber(String creditCardNumber) {
+        syscoLabUIOgm.sendKeys(txtCreditCardNumber, creditCardNumber);
     }
 
     public boolean isCreditCardInvalidMonthErrorDisplayed() {
