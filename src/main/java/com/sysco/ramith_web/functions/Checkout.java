@@ -11,6 +11,7 @@ public class Checkout {
 
     public void clickOnProceedToCheckout() {
         checkoutPage.clickProceedToCheckout();
+        checkoutPage.waitUntilThePageLoad();
     }
 
     public String getSecureCheckoutHeading() {

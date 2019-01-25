@@ -9,9 +9,9 @@ import static com.sysco.ramith_web.pages.LogInPage.syscoLabUIOgm;
  */
 public class SalesPage {
     private By lnkShoppingCart = By.xpath("//header/div[2]/div/div[4]");
-    private By lblNoItemsInTheCart = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/strong/span");
+    private By lblItemsInTheCart = By.xpath("//header/div[2]/div/div[4]/span/span/span");
     private By lblShoppingCartHeading = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[1]/strong");
-    private By lnkRemoveFirstItem = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/div[1]/div/a[2]");
+    private By lnkRemoveFirstItem = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/div[1]/div[1]/a[2]/svg");
     private By btnRemoveConfirmPopup = By.xpath("//body/div[5]/aside[2]/div[2]");
     private By btnRemoveConfirm = By.xpath("//body/div[5]/aside[2]/div[2]/footer/button[2]");
     private By lstCategories = By.xpath("//header/div[2]/nav/ul");
@@ -21,12 +21,16 @@ public class SalesPage {
     private By lblCartProductName = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/div[1]/div/div[1]/strong/a");
     private By lblCartProductPrice = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/div[1]/div/div[1]/div[1]/div[2]/div/span/span/span/span");
 
+    public void waitUntilCartIconLoad() {
+        syscoLabUIOgm.waitTillElementLoaded(lnkShoppingCart);
+    }
+
     public void clickOnShoppingCart() {
         syscoLabUIOgm.click(lnkShoppingCart);
     }
 
-    public boolean isNoItemsMessageDisplayed() {
-        return syscoLabUIOgm.isDisplayed(lblNoItemsInTheCart);
+    public void itemsExistInCart() {
+        syscoLabUIOgm.waitTillElementLoaded(lblItemsInTheCart, 10);
     }
 
     public void waitUntilICartLoads() {
@@ -35,6 +39,10 @@ public class SalesPage {
 
     public int getNumberOfItemsInCart() {
         return syscoLabUIOgm.findElements(lnkRemoveFirstItem).size();
+    }
+
+    public void waitUntilRemoveFirstCartItemIcon() {
+        syscoLabUIOgm.waitTillElementLoaded(lnkRemoveFirstItem);
     }
 
     public void removeFirstCartItem() {

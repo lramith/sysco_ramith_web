@@ -36,7 +36,7 @@ public class Product {
 
     public void storeProductNameAndPrice() {
         productName = productPage.getProductName();
-        productPrice = productPage.getProductPrice();
+        productPrice = productPage.getProductPrice(productPage.getProductPrices().get((productPage.getProductPrices().size())-1));
         successMessage = "You added " + productName + " to your shopping cart.";
     }
 
@@ -45,11 +45,8 @@ public class Product {
     }
 
     public String getAddToCartSuccessMessage() {
-        if (productPage.isAddToCartSuccessMessageDisplayed()) {
-            return productPage.getTextOfAddToCartSuccessMessage();
-        } else {
-            return null;
-        }
+        productPage.waitUntilAddToCartSuccessMessage();
+        return productPage.getTextOfAddToCartSuccessMessage();
     }
 
     public String getAddedProductName() {

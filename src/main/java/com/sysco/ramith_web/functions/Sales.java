@@ -10,21 +10,25 @@ public class Sales {
     private static SalesPage salesPage = new SalesPage();
 
     public void emptyExistingCart() {
-        salesPage.clickOnShoppingCart();
-        salesPage.waitUntilICartLoads();
-        if (!salesPage.isNoItemsMessageDisplayed()) {
+        try {
+            salesPage.itemsExistInCart();
+            salesPage.clickOnShoppingCart();
+            salesPage.waitUntilICartLoads();
             int numberOfItems = salesPage.getNumberOfItemsInCart();
             for (; numberOfItems != 0; numberOfItems--) {
+                salesPage.waitUntilRemoveFirstCartItemIcon();
                 salesPage.removeFirstCartItem();
                 salesPage.waitUntilConfirmPopup();
                 salesPage.removeConfirmItem();
+                salesPage.clickOnShoppingCart();
             }
+        } finally {
         }
-        salesPage.clickOnShoppingCart();
     }
 
     public void viewCart() {
         salesPage.clickOnShoppingCart();
+        salesPage.waitUntilICartLoads();
     }
 
     public String getCartProductName() {

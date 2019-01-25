@@ -15,7 +15,7 @@ public class ProductPage {
     private By getDrpDwnSizeCategoryFirstItem = By.xpath("//*[@id=\"product-options-wrapper\"]/div/div/div/div[1]/div[2]/a[1]");
     private By lstSizeIndicator = By.xpath("//*[@id=\"swatch-row-183\"]/div");
     private By lblProductName = By.xpath("//*[@id=\"maincontent\"]/div/div/div[1]/div[2]/div/div[1]/div[1]/div/h1/span");
-    private By lblProductPrice = By.xpath("//*[@id=\"maincontent\"]/div/div/div[1]/div[2]/div/div[1]/div[2]/div/span");
+    private By lstProductPrice = By.xpath("//*[@id=\"maincontent\"]/div/div/div[1]/div[2]/div/div[1]/div[2]/div/span");
     private By btnAddToCart = By.id("product-addtocart-button");
     private By lblAddToCartSuccess = By.xpath("//*[@id=\"maincontent\"]/div/div/div[1]/div[1]/div[1]/div[2]/div[2]/div/div");
     private By btnProceedToCheckout = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[2]/div[1]/div/button");
@@ -44,8 +44,8 @@ public class ProductPage {
         syscoLabUIOgm.click(btnAddToCart);
     }
 
-    public boolean isAddToCartSuccessMessageDisplayed() {
-        return syscoLabUIOgm.isDisplayed(lblAddToCartSuccess);
+    public void waitUntilAddToCartSuccessMessage() {
+        syscoLabUIOgm.waitTillElementLoaded(lblAddToCartSuccess);
     }
 
     public String getTextOfAddToCartSuccessMessage() {
@@ -56,8 +56,12 @@ public class ProductPage {
         return syscoLabUIOgm.getText(lblProductName);
     }
 
-    public String getProductPrice() {
-        return syscoLabUIOgm.getText(lblProductPrice);
+    public List<WebElement> getProductPrices() {
+        return syscoLabUIOgm.findElements(lstProductPrice);
+    }
+
+    public String getProductPrice(WebElement lblPrice){
+        return syscoLabUIOgm.getText(lblPrice);
     }
 
     public void clikcOnCheckout() {

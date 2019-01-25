@@ -10,8 +10,8 @@ import static com.sysco.ramith_web.pages.LogInPage.syscoLabUIOgm;
 public class CheckoutPage {
     private By btnProceedToCheckout = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[2]/div[1]/div/button");
     private By lblSecureCheckout = By.xpath("//*[@id=\"maincontent\"]/div[1]/h1/span");
-    private By txtFirstName = By.id("OSUWM4X");
-    private By txtLastName = By.id("EFQE1SC");
+    private By txtFirstName = By.id("P0T3A6J");
+    private By txtLastName = By.id("P7HP8YD");
     private By btnContinue = By.xpath("//*[@id=\"checkout\"]/div[2]/div[1]/div[3]/button");
     private By lblCityRequiredField = By.xpath("//*[@id=\"error-AQ99XG4\"]/span");
     private By lblStateRequiredField = By.xpath("//*[@id=\"error-GYD2P77\"]/span");
@@ -31,6 +31,10 @@ public class CheckoutPage {
         syscoLabUIOgm.click(btnProceedToCheckout);
     }
 
+    public void waitUntilThePageLoad() {
+        syscoLabUIOgm.waitTillElementLoaded(lblSecureCheckout);
+    }
+
     public boolean isSecureCheckoutHeadingDisplayed() {
         return syscoLabUIOgm.isDisplayed(lblSecureCheckout);
     }
@@ -40,11 +44,11 @@ public class CheckoutPage {
     }
 
     public String getFirstName() {
-        return syscoLabUIOgm.getText(txtFirstName);
+        return syscoLabUIOgm.getAttribute(txtFirstName, "value");
     }
 
     public String getLastName() {
-        return syscoLabUIOgm.getText(txtLastName);
+        return syscoLabUIOgm.getAttribute(txtLastName, "value");
     }
 
     public void clickContinue() {
