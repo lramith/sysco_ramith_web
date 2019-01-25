@@ -25,68 +25,68 @@ public class SalesPage {
         syscoLabUIOgm.click(lnkShoppingCart);
     }
 
-    public boolean isNoItemsMessegeDisplayed(){
+    public boolean isNoItemsMessageDisplayed() {
         return syscoLabUIOgm.isDisplayed(lblNoItemsInTheCart);
     }
 
-    public void waitUntilICartLoads(){
+    public void waitUntilICartLoads() {
         syscoLabUIOgm.waitTillElementLoaded(lblShoppingCartHeading);
     }
 
-    public int getNumberOfItemsInCart(){
+    public int getNumberOfItemsInCart() {
         return syscoLabUIOgm.findElements(lnkRemoveFirstItem).size();
     }
 
-    public void removeFirstCartItem(){
+    public void removeFirstCartItem() {
         syscoLabUIOgm.click(lnkRemoveFirstItem);
     }
 
-    public void waitUntilConfirmPopup(){
+    public void waitUntilConfirmPopup() {
         syscoLabUIOgm.waitTillElementLoaded(btnRemoveConfirmPopup);
     }
 
-    public void removeConfirmItem(){
+    public void removeConfirmItem() {
         syscoLabUIOgm.click(btnRemoveConfirm);
     }
 
 
-    public int getNumberOfCategories(){
+    public int getNumberOfCategories() {
         return syscoLabUIOgm.findElements(lstCategories).size();
     }
 
-    public int getNumberOfSubCategories(){
+    public int getNumberOfSubCategories() {
         return syscoLabUIOgm.findElements(lstSubCategories).size();
     }
 
-    public void clickOnCategory(int categoryIndex){
+    public void clickOnCategory(int categoryIndex) {
         syscoLabUIOgm.click(syscoLabUIOgm.findElements(lstCategories).get(categoryIndex));
     }
 
-    public void clickOnSubCategory(int categoryIndex){
+    public void clickOnSubCategory(int categoryIndex) {
         syscoLabUIOgm.click(syscoLabUIOgm.findElements(lstSubCategories).get(categoryIndex));
     }
 
-    public int getNumberOfProducts(){
+    public int getNumberOfProducts() {
         return syscoLabUIOgm.findElements(lstSubCategories).size();
     }
 
-    public void waitUntilProductsAreLoading(){
+    public void waitUntilProductsAreLoading() {
         syscoLabUIOgm.waitTillElementLoaded(lstProducts);
     }
 
-    public void clickOnAProduct(int productIndex){
+    public void clickOnAProduct(int productIndex) {
         syscoLabUIOgm.click(syscoLabUIOgm.findElements(lstProducts).get(productIndex));
     }
 
-    public boolean isProductHeadingDisplayed(){
+    public boolean isProductHeadingDisplayed() {
         return syscoLabUIOgm.isDisplayed(lblProductHeading);
     }
 
-    public String getCartProductName(){
+    public String getCartProductName() {
         return syscoLabUIOgm.getText(lblCartProductName);
     }
 
-    public String getCartProductPrice(){
+    public String getCartProductPrice() {
         return syscoLabUIOgm.getText(lblCartProductPrice);
     }
 

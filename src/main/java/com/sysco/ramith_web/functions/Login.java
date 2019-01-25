@@ -8,10 +8,13 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 /**
  * This class provide functions related to login to the application
  */
-public class Login  {
+public class Login {
 
     public static LogInPage loginPage = new LogInPage();
 
+    public static void quiteDriver() {
+        loginPage.quitDriver();
+    }
 
     public void loadLoginPage() {
 
@@ -24,7 +27,7 @@ public class Login  {
         }
     }
 
-    public boolean isLoginHyperLinkDisplayed(){
+    public boolean isLoginHyperLinkDisplayed() {
         return loginPage.isLoginHyperLinkDisplayed();
     }
 
@@ -39,40 +42,33 @@ public class Login  {
 
     public String logInWithInvalidCredentials(String userName, String password) {
         loginWithGivenCredentials(userName, password);
-        if(loginPage.isInvalidCredentialErrorDisplayed()){
+        if (loginPage.isInvalidCredentialErrorDisplayed()) {
             return loginPage.getInvalidCredentialErrorMessege();
-        }
-        else {
+        } else {
             return null;
         }
     }
 
-    public String getUserNameErrorMessage(){
-        if(loginPage.isUserNameErrorMessageDisplayed()){
+    public String getUserNameErrorMessage() {
+        if (loginPage.isUserNameErrorMessageDisplayed()) {
             return loginPage.getUserNameErrorMessage();
-        }
-        else {
+        } else {
             return null;
         }
     }
 
-    public String getPasswordErrorMessage(){
-        if(loginPage.isPasswordErrorMessageDisplayed()){
+    public String getPasswordErrorMessage() {
+        if (loginPage.isPasswordErrorMessageDisplayed()) {
             return loginPage.getPasswordErrorMessage();
-        }
-        else {
+        } else {
             return null;
         }
     }
 
-    private void loginWithGivenCredentials(String userName, String password){
+    private void loginWithGivenCredentials(String userName, String password) {
         loginPage.clickOnLoginLink();
         loginPage.enterUserName(userName);
         loginPage.enterPassword(password);
         loginPage.clickOnLoginButton();
-    }
-
-    public static void quiteDriver() {
-        loginPage.quitDriver();
     }
 }

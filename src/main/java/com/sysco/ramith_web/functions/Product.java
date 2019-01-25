@@ -20,7 +20,11 @@ public class Product {
     }
 
     private WebElement getAvailableSize() {
-        select the size type
+        productPage.clickOnSizeDropDown();
+        productPage.selectFirstItemInSizeDropDown();
+        if ("true".equals(productPage.isDropDownExpanded())) {
+            productPage.clickOnSizeDropDown();
+        }
         List<WebElement> sizes = productPage.getAvailableSizes();
         for (WebElement size : sizes) {
             if (size.getAttribute("class").equals("swatch-option text")) {
@@ -30,21 +34,20 @@ public class Product {
         return null;
     }
 
-    public void storeProductNameAndPrice(){
+    public void storeProductNameAndPrice() {
         productName = productPage.getProductName();
         productPrice = productPage.getProductPrice();
-        successMessage = "You added "+ productName +" to your shopping cart.";
+        successMessage = "You added " + productName + " to your shopping cart.";
     }
 
-    public void addProductToCart(){
+    public void addProductToCart() {
         productPage.clickOnAddToCartButton();
     }
 
-    public String getAddToCartSuccessMessage(){
-        if (productPage.isAddToCartSuccessMessageDisplayed()){
+    public String getAddToCartSuccessMessage() {
+        if (productPage.isAddToCartSuccessMessageDisplayed()) {
             return productPage.getTextOfAddToCartSuccessMessage();
-        }
-        else {
+        } else {
             return null;
         }
     }

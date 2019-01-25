@@ -53,31 +53,31 @@ public class LogInPage {
         syscoLabUIOgm.click(btnLogin);
     }
 
-    public boolean isUserNameErrorMessageDisplayed(){
+    public boolean isUserNameErrorMessageDisplayed() {
         return syscoLabUIOgm.isDisplayed(lblErrorUserName);
     }
 
-    public String getUserNameErrorMessage(){
+    public String getUserNameErrorMessage() {
         return syscoLabUIOgm.getText(lblErrorUserName);
     }
 
-    public boolean isPasswordErrorMessageDisplayed(){
+    public boolean isPasswordErrorMessageDisplayed() {
         return syscoLabUIOgm.isDisplayed(lblPassword);
     }
 
-    public String getPasswordErrorMessage(){
+    public String getPasswordErrorMessage() {
         return syscoLabUIOgm.getText(lblPassword);
     }
 
-    public boolean isInvalidCredentialErrorDisplayed(){
+    public boolean isInvalidCredentialErrorDisplayed() {
         return syscoLabUIOgm.isDisplayed(lblInvalidCredentials);
     }
 
-    public String getInvalidCredentialErrorMessege(){
+    public String getInvalidCredentialErrorMessege() {
         return syscoLabUIOgm.getText(lblInvalidCredentials);
     }
 
-    public String getLoggedInUserName(){
+    public String getLoggedInUserName() {
         return syscoLabUIOgm.getText(lnkLoggedInName);
     }
 
