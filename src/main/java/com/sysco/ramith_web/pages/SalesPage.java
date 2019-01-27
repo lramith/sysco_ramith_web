@@ -11,7 +11,7 @@ public class SalesPage {
     private By lnkShoppingCart = By.xpath("//header/div[2]/div/div[4]");
     private By lblItemsInTheCart = By.xpath("//header/div[2]/div/div[4]/span/span/span");
     private By lblShoppingCartHeading = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[1]/strong");
-    private By lnkRemoveFirstItem = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/div[1]/div[1]/a[2]/svg");
+    private By lnkRemoveFirstItem = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[1]/div[1]/div[1]/a[2]");
     private By btnRemoveConfirmPopup = By.xpath("//body/div[5]/aside[2]/div[2]");
     private By btnRemoveConfirm = By.xpath("//body/div[5]/aside[2]/div[2]/footer/button[2]");
     private By lstCategories = By.xpath("//header/div[2]/nav/ul");
@@ -29,7 +29,7 @@ public class SalesPage {
         syscoLabUIOgm.click(lnkShoppingCart);
     }
 
-    public void itemsExistInCart() {
+    public void waitUtilItemsLoadInToCart() {
         syscoLabUIOgm.waitTillElementLoaded(lblItemsInTheCart, 10);
     }
 

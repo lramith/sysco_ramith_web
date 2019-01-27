@@ -11,9 +11,9 @@ public class Sales {
 
     public void emptyExistingCart() {
         try {
-            salesPage.itemsExistInCart();
             salesPage.clickOnShoppingCart();
             salesPage.waitUntilICartLoads();
+            salesPage.waitUtilItemsLoadInToCart();
             int numberOfItems = salesPage.getNumberOfItemsInCart();
             for (; numberOfItems != 0; numberOfItems--) {
                 salesPage.waitUntilRemoveFirstCartItemIcon();

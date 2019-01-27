@@ -10,8 +10,8 @@ import static com.sysco.ramith_web.pages.LogInPage.syscoLabUIOgm;
 public class CheckoutPage {
     private By btnProceedToCheckout = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[2]/div[1]/div/button");
     private By lblSecureCheckout = By.xpath("//*[@id=\"maincontent\"]/div[1]/h1/span");
-    private By txtFirstName = By.id("P0T3A6J");
-    private By txtLastName = By.id("P7HP8YD");
+    private By txtFirstName = By.xpath("//*[@id=\"shipping-new-address-form\"]/div[1]/div");
+    private By txtLastName = By.xpath("//*[@id=\"shipping-new-address-form\"]/div[2]/div");
     private By btnContinue = By.xpath("//*[@id=\"checkout\"]/div[2]/div[1]/div[3]/button");
     private By lblCityRequiredField = By.xpath("//*[@id=\"error-AQ99XG4\"]/span");
     private By lblStateRequiredField = By.xpath("//*[@id=\"error-GYD2P77\"]/span");
