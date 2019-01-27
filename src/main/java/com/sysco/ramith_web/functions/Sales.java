@@ -10,19 +10,19 @@ public class Sales {
     private static SalesPage salesPage = new SalesPage();
 
     public void emptyExistingCart() {
-        try {
+        salesPage.waitUntilCartIconLoads();
+        if (salesPage.isCartNotEmpty()) {
             salesPage.clickOnShoppingCart();
             salesPage.waitUntilICartLoads();
-            salesPage.waitUtilItemsLoadInToCart();
             int numberOfItems = salesPage.getNumberOfItemsInCart();
             for (; numberOfItems != 0; numberOfItems--) {
                 salesPage.waitUntilRemoveFirstCartItemIcon();
                 salesPage.removeFirstCartItem();
                 salesPage.waitUntilConfirmPopup();
                 salesPage.removeConfirmItem();
-                salesPage.clickOnShoppingCart();
             }
-        } finally {
+            salesPage.clickOnShoppingCart();
+            salesPage.waitUntilTheCartClose();
         }
     }
 
@@ -42,8 +42,8 @@ public class Sales {
     public boolean navigateToRandomProduct() {
         salesPage.clickOnCategory((int) (Math.random() * (salesPage.getNumberOfCategories() - 1)));
         salesPage.clickOnSubCategory((int) (Math.random() * (salesPage.getNumberOfSubCategories() - 1)));
-        salesPage.waitUntilProductsAreLoading();
-        salesPage.clickOnAProduct((int) (Math.random() * (salesPage.getNumberOfProducts() - 1)));
+        salesPage.waitUntilTheProductLoad();
+        salesPage.clickOnAProduct();
         return salesPage.isProductHeadingDisplayed();
     }
 }

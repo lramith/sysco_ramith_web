@@ -17,7 +17,7 @@ public class CheckoutPage {
     private By lblStateRequiredField = By.xpath("//*[@id=\"error-GYD2P77\"]/span");
     private By lblPostCodeRequiredField = By.xpath("//*[@id=\"error-C53AN22\"]/span");
     private By lblPhoneRequiredField = By.xpath("//*[@id=\"error-RE4DNMK\"]/span");
-    private By txtPostCode = By.id("C53AN22");
+    private By txtPostCode = By.xpath("//*[@id=\"shipping-new-address-form\"]/div[7]/div/input");
     private By drpFirstPostCode = By.id("ui-id-3");
     private By txtAddressLine = By.xpath("//*[@id=\"shipping-new-address-form\"]/fieldset/div/div[1]/div");
     private By txtPhoneNumber = By.id("RE4DNMK");
