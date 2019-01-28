@@ -10,20 +10,18 @@ import static com.sysco.ramith_web.pages.LogInPage.syscoLabUIOgm;
 public class CheckoutPage {
     private By btnProceedToCheckout = By.xpath("//*[@id=\"minicartOffcanvas\"]/div/div[2]/div[2]/div[1]/div/button");
     private By lblSecureCheckout = By.xpath("//*[@id=\"maincontent\"]/div[1]/h1/span");
-    private By txtFirstName = By.xpath("//*[@id=\"shipping-new-address-form\"]/div[1]/div");
-    private By txtLastName = By.xpath("//*[@id=\"shipping-new-address-form\"]/div[2]/div");
+    private By lstTextBoxes = By.cssSelector(".input-text");
     private By btnContinue = By.xpath("//*[@id=\"checkout\"]/div[2]/div[1]/div[3]/button");
-    private By lblCityRequiredField = By.xpath("//*[@id=\"error-AQ99XG4\"]/span");
-    private By lblStateRequiredField = By.xpath("//*[@id=\"error-GYD2P77\"]/span");
-    private By lblPostCodeRequiredField = By.xpath("//*[@id=\"error-C53AN22\"]/span");
-    private By lblPhoneRequiredField = By.xpath("//*[@id=\"error-RE4DNMK\"]/span");
-    private By txtPostCode = By.xpath("//*[@id=\"shipping-new-address-form\"]/div[7]/div/input");
+    private By lblCityRequiredField = By.xpath("//*[@id=\"shipping-new-address-form\"]/div[4]/div/div[@class=\"field-error mage-error\"]/span");
+    private By lblStateRequiredField = By.xpath("//*[@id=\"shipping-new-address-form\"]/div[5]/div/div[@class=\"field-error mage-error\"]/span");
+    private By lblPostCodeRequiredField = By.xpath("//*[@id=\"shipping-new-address-form\"]/div[7]/div/div[@class=\"field-error mage-error\"]/span");
+    private By lblPhoneRequiredField = By.xpath("//*[@id=\"shipping-new-address-form\"]/div[9]/div/div[2]/div/div[@class=\"field-error\"]/span");
     private By drpFirstPostCode = By.id("ui-id-3");
-    private By txtAddressLine = By.xpath("//*[@id=\"shipping-new-address-form\"]/fieldset/div/div[1]/div");
-    private By txtPhoneNumber = By.id("RE4DNMK");
+    private By lblCreditCardPay = By.xpath("//*[@id=\"checkout-payment-method-load\"]/div/div/div[3]/div[1]/label/strong");
     private By rdBtnCreditCardPay = By.xpath("//*[@id=\"checkout-payment-method-load\"]/div/div/div[3]/div[1]/label");
     private By lblValidCreditCardRequiredError = By.xpath("//*[@id=\"payment_form_braintree\"]/div[2]/div/div[2]/span");
-    private By txtCreditCardNumber = By.id("braintree-hosted-field-number");
+    private By iFrameCardNumber = By.id("braintree-hosted-field-number");
+    private By txtCreditCardNumber = By.id("credit-card-number");
     private By lblCreditCardInvalidMonthError = By.xpath("//*[@id=\"payment_form_braintree\"]/div[3]/div/div[1]/div[2]/span");
     private By lblCreditCardInvalidYearError = By.xpath("//*[@id=\"payment_form_braintree\"]/div[3]/div/div[2]/div[2]/span");
 
@@ -43,16 +41,24 @@ public class CheckoutPage {
         return syscoLabUIOgm.getText(lblSecureCheckout);
     }
 
+    public int getNumberOfTextBoxesLoadedInThePage() {
+        return syscoLabUIOgm.findElements(lstTextBoxes).size();
+    }
+
     public String getFirstName() {
-        return syscoLabUIOgm.getAttribute(txtFirstName, "value");
+        return syscoLabUIOgm.getAttribute(syscoLabUIOgm.findElements(lstTextBoxes).get(0), "value");
     }
 
     public String getLastName() {
-        return syscoLabUIOgm.getAttribute(txtLastName, "value");
+        return syscoLabUIOgm.getAttribute(syscoLabUIOgm.findElements(lstTextBoxes).get(1), "value");
+    }
+
+    public void waitUntilContinueButtonLoads() {
+        syscoLabUIOgm.waitTillElementLoaded(btnContinue);
     }
 
     public void clickContinue() {
-        syscoLabUIOgm.click(btnContinue);
+        syscoLabUIOgm.click(syscoLabUIOgm.findElement(btnContinue));
     }
 
     public boolean isCityRequiredFieldErrorDisplayed() {
@@ -88,7 +94,11 @@ public class CheckoutPage {
     }
 
     public void setPostCode(String postCode) {
-        syscoLabUIOgm.sendKeys(txtPostCode, postCode);
+        syscoLabUIOgm.sendKeys(syscoLabUIOgm.findElements(lstTextBoxes).get(7), postCode);
+    }
+
+    public void waitUntilDropDownExpand() {
+        syscoLabUIOgm.waitTillElementLoaded(drpFirstPostCode);
     }
 
     public void selectFirstPostCode() {
@@ -96,11 +106,19 @@ public class CheckoutPage {
     }
 
     public void setAddressLine(String address) {
-        syscoLabUIOgm.sendKeys(txtAddressLine, address);
+        syscoLabUIOgm.sendKeys(syscoLabUIOgm.findElements(lstTextBoxes).get(3), address);
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        syscoLabUIOgm.sendKeys(txtPhoneNumber, phoneNumber);
+        syscoLabUIOgm.sendKeys(syscoLabUIOgm.findElements(lstTextBoxes).get(8), phoneNumber);
+    }
+
+    public void waitUntilPaymentMethodsLoad() {
+        syscoLabUIOgm.waitTillElementLoaded(lblCreditCardPay);
+    }
+
+    public void waitUntilCreditCardPaymentFieldsLoad() {
+        syscoLabUIOgm.waitTillElementLoaded(iFrameCardNumber);
     }
 
     public void selectCreditCardPay() {
@@ -113,6 +131,18 @@ public class CheckoutPage {
 
     public String getValidCreditCardRequiredError() {
         return syscoLabUIOgm.getText(lblValidCreditCardRequiredError);
+    }
+
+    public void switchToDefaultFrame() {
+        syscoLabUIOgm.switchToDefaultFrame();
+    }
+
+    public void switchToIFrameNumber() {
+        syscoLabUIOgm.switchToFrame(iFrameCardNumber);
+    }
+
+    public void clickOnCreditCardFiled() {
+        syscoLabUIOgm.click(txtCreditCardNumber);
     }
 
     public void setValidCreditCardNumber(String creditCardNumber) {

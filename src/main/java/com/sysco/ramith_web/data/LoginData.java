@@ -12,7 +12,7 @@ public class LoginData {
     public static String address;
     public static String postCode;
     public static String phoneNumber;
-    public static String creditCard;
+    public static String creditCardNumber;
 
     public static String getInvalidUserName() {
         return invalidUserName;
@@ -42,8 +42,8 @@ public class LoginData {
         return phoneNumber;
     }
 
-    public static String getCreditCard() {
-        return creditCard;
+    public static String getCreditCardNumber() {
+        return creditCardNumber;
     }
 
     public String getUserName() {

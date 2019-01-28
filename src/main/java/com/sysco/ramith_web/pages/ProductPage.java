@@ -60,7 +60,7 @@ public class ProductPage {
         return syscoLabUIOgm.findElements(lstProductPrice);
     }
 
-    public String getProductPrice(WebElement lblPrice){
+    public String getProductPrice(WebElement lblPrice) {
         return syscoLabUIOgm.getText(lblPrice);
     }
 

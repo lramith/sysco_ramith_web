@@ -21,6 +21,10 @@ public class Checkout {
         return null;
     }
 
+    public int getNumberOfTextBoxesLoaded() {
+        return checkoutPage.getNumberOfTextBoxesLoadedInThePage();
+    }
+
     public String getFirstName() {
         return checkoutPage.getFirstName();
     }
@@ -30,6 +34,7 @@ public class Checkout {
     }
 
     public void clickOnContinue() {
+        checkoutPage.waitUntilContinueButtonLoads();
         checkoutPage.clickContinue();
     }
 
@@ -69,12 +74,19 @@ public class Checkout {
         checkoutPage.setPostCode(postCode);
     }
 
+    public void selectFirstPostCodeFromDropDown() {
+        checkoutPage.waitUntilDropDownExpand();
+        checkoutPage.selectFirstPostCode();
+    }
+
     public void setPhone(String phone) {
         checkoutPage.setPhoneNumber(phone);
     }
 
     public void selectPaymentMethodAsCreditCard() {
+        checkoutPage.waitUntilPaymentMethodsLoad();
         checkoutPage.selectCreditCardPay();
+        checkoutPage.waitUntilCreditCardPaymentFieldsLoad();
     }
 
     public String getInvalidCreditCardError() {
@@ -85,7 +97,10 @@ public class Checkout {
     }
 
     public void setCreditCardNumber(String creditCardNumber) {
+        checkoutPage.switchToIFrameNumber();
+        checkoutPage.clickOnCreditCardFiled();
         checkoutPage.setValidCreditCardNumber(creditCardNumber);
+        checkoutPage.switchToDefaultFrame();
     }
 
     public String getInvalidCreditCardMonthError() {

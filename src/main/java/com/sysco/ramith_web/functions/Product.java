@@ -36,7 +36,7 @@ public class Product {
 
     public void storeProductNameAndPrice() {
         productName = productPage.getProductName();
-        productPrice = productPage.getProductPrice(productPage.getProductPrices().get((productPage.getProductPrices().size())-1));
+        productPrice = productPage.getProductPrice(productPage.getProductPrices().get((productPage.getProductPrices().size()) - 1));
         successMessage = "You added " + productName + " to your shopping cart.";
     }
 

@@ -11,24 +11,23 @@ public class Sales {
 
     public void emptyExistingCart() {
         salesPage.waitUntilCartIconLoads();
-        if (salesPage.isCartNotEmpty()) {
-            salesPage.clickOnShoppingCart();
-            salesPage.waitUntilICartLoads();
-            int numberOfItems = salesPage.getNumberOfItemsInCart();
-            for (; numberOfItems != 0; numberOfItems--) {
-                salesPage.waitUntilRemoveFirstCartItemIcon();
-                salesPage.removeFirstCartItem();
-                salesPage.waitUntilConfirmPopup();
-                salesPage.removeConfirmItem();
-            }
-            salesPage.clickOnShoppingCart();
-            salesPage.waitUntilTheCartClose();
+        salesPage.clickOnShoppingCart();
+        salesPage.waitUntilICartLoads();
+        int numberOfItems = salesPage.getNumberOfItemsInCart();
+        for (; numberOfItems != 0; numberOfItems--) {
+            salesPage.waitUntilRemoveCartItemIcon();
+            salesPage.removeFirstCartItem();
+            salesPage.waitUntilConfirmPopup();
+            salesPage.removeConfirmItem();
         }
+        salesPage.clickOnCloseCart();
+        salesPage.waitUntilTheCartClose();
     }
 
     public void viewCart() {
         salesPage.clickOnShoppingCart();
         salesPage.waitUntilICartLoads();
+        salesPage.waitUntilCartItemsLoad();
     }
 
     public String getCartProductName() {
@@ -36,6 +35,7 @@ public class Sales {
     }
 
     public String getCartProductPrice() {
+        salesPage.waitUntilProductPricePopulate();
         return salesPage.getCartProductPrice();
     }
 

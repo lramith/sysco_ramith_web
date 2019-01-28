@@ -2,21 +2,21 @@ package com.sysco.ramith_web.tests;
 
 
 import com.sysco.ramith_web.functions.Checkout;
+import com.sysco.ramith_web.functions.Login;
 import com.sysco.ramith_web.functions.Product;
 import com.sysco.ramith_web.functions.Sales;
-import com.sysco.ramith_web.utils.TestBase;
+import com.sysco.ramith_web.utils.LoginUtil;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
-public class purchaseItemsTest extends TestBase {
+public class purchaseItemsTest extends LoginUtil {
 
-
-    private static final String INVALID_USERNAME_ERROR_MSG = "YOU DID NOT SIGN IN CORRECTLY OR YOUR ACCOUNT IS TEMPORARILY DISABLED.";
-    private static final String REQUIRED_FIELD_ERROR_MESSAGE = "THIS IS A REQUIRED FIELD.";
+    private static final String REQUIRED_FIELD_ERROR_MESSAGE_UPPER_CASE = "THIS IS A REQUIRED FIELD.";
+    private static final String REQUIRED_FIELD_ERROR_MESSAGE = "This is a required field.";
     private static final String SECURE_CHECKOUT_HEADING = "SECURE CHECKOUT";
     private static final String INVALID_CREDIT_CARD_ERROR = "PLEASE, ENTER VALID CREDIT CARD NUMBER";
     private static final String VALID_EXPIRATION_MONTH_ERROR = "PLEASE, ENTER VALID EXPIRATION DATE";
@@ -24,11 +24,12 @@ public class purchaseItemsTest extends TestBase {
     private Sales sales;
     private Product product;
     private Checkout checkout;
+    private Login login;
 
-    @BeforeTest
+    @BeforeClass
     public void init(ITestContext iTestContext) {
-        iTestContext.setAttribute("feature", "Purchase an Item");
-        initializeLogin();
+        iTestContext.setAttribute("feature", "Online Shopping - Purchase an Item");
+        login = initializeLogin();
         sales = new Sales();
         product = new Product();
         checkout = new Checkout();
@@ -53,14 +54,16 @@ public class purchaseItemsTest extends TestBase {
         Assert.assertEquals(sales.getCartProductName(), product.getAddedProductName(), "Product name should be same as added product");
         Assert.assertEquals(sales.getCartProductPrice(), product.getAddedProductPrice(), "Product name should be same as added product");
         checkout.clickOnProceedToCheckout();
+        Assert.assertTrue(checkout.getNumberOfTextBoxesLoaded() >= 9, "Text boxes in the checkout page should be loaded");
         Assert.assertEquals(checkout.getFirstName(), loginData.getFirstName());
         Assert.assertEquals(checkout.getLastName(), loginData.getLastName());
         checkout.clickOnContinue();
-//        Assert.assertEquals(checkout.getCityRequiredErrorMessage(), REQUIRED_FIELD_ERROR_MESSAGE);
-//        Assert.assertEquals(checkout.getStateRequiredErrorMessage(), REQUIRED_FIELD_ERROR_MESSAGE);
-//        Assert.assertEquals(checkout.getPostCodeRequiredErrorMessage(), REQUIRED_FIELD_ERROR_MESSAGE);
-//        Assert.assertEquals(checkout.getPhoneRequiredErrorMessage(), REQUIRED_FIELD_ERROR_MESSAGE);
+        Assert.assertEquals(checkout.getCityRequiredErrorMessage(), REQUIRED_FIELD_ERROR_MESSAGE_UPPER_CASE);
+        Assert.assertEquals(checkout.getStateRequiredErrorMessage(), REQUIRED_FIELD_ERROR_MESSAGE_UPPER_CASE);
+        Assert.assertEquals(checkout.getPostCodeRequiredErrorMessage(), REQUIRED_FIELD_ERROR_MESSAGE_UPPER_CASE);
+        Assert.assertEquals(checkout.getPhoneRequiredErrorMessage(), REQUIRED_FIELD_ERROR_MESSAGE);
         checkout.setPostCode(loginData.getPostCode());
+        checkout.selectFirstPostCodeFromDropDown();
         checkout.setAddress(loginData.getAddress());
         checkout.setPhone(loginData.getPhoneNumber());
         checkout.clickOnContinue();
@@ -68,25 +71,11 @@ public class purchaseItemsTest extends TestBase {
         checkout.selectPaymentMethodAsCreditCard();
         checkout.clickOnContinue();
         Assert.assertEquals(checkout.getInvalidCreditCardError(), INVALID_CREDIT_CARD_ERROR);
-        checkout.setCreditCardNumber(loginData.getCreditCard());
+        checkout.setCreditCardNumber(loginData.getCreditCardNumber());
         checkout.clickOnContinue();
         Assert.assertEquals(checkout.getInvalidCreditCardMonthError(), VALID_EXPIRATION_MONTH_ERROR);
         Assert.assertEquals(checkout.getInvalidCreditCardYearError(), VALID_EXPIRATION_YEAR_ERROR);
 
-    }
-
-    @Test
-    public void testInvalidLogin() throws RuntimeException {
-        login.loadLoginPage();
-        try {
-            Assert.assertTrue(login.isLoginHyperLinkDisplayed(), "Login hyperlink should display in the home page");
-            login.logInWithOutCredentials();
-            Assert.assertEquals(login.getUserNameErrorMessage(), REQUIRED_FIELD_ERROR_MESSAGE);
-            Assert.assertEquals(login.getPasswordErrorMessage(), REQUIRED_FIELD_ERROR_MESSAGE);
-            Assert.assertEquals(login.logInWithInvalidCredentials(loginData.getInvalidUserName(), loginData.getPassword()), INVALID_USERNAME_ERROR_MSG);
-        } finally {
-            login.quiteDriver();
-        }
     }
 
     @AfterClass
